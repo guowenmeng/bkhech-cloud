@@ -16,6 +16,6 @@ feign:
   client:
     config:
       default:
-        loggerLevel: basic
-        connectTimeout: 5000
-        readTimeout: 5000
+        loggerLevel: basic #日志等级
+        connectTimeout: 5000 #连接超时
+        readTimeout: 5000 #读取超时
