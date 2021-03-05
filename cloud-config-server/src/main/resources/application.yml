@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://gitee.com/bkhech/springcloud-config.git # github因为网络不好，可能会出现各种报错，慎用
+          skip-ssl-validation: true
+          #解决：Could not fetch remote for master remote: https://gitee.com/bkhech/springcloud-config.git
+          force-pull: true
+          default-label: master
+          basedir: local-config-server
+          timeout: 30
+      name: config-server # 配置文件名称。默认 ${spring.application.name}
+  rabbitmq:
+    host: 192.168.85.125
+    port: 5672
+    username: admin
+    password: admin
+    virtual-host: /
+
+server:
+  port: 8888
+eureka:
+  client:
+    register-with-eureka: true  #服务注册开关
+    fetch-registry: true #服务发现开关
+    service-url:
+      defaultZone: http://peer1:8761/eureka
+management:
+  endpoints:
+    web:
+      exposure:
+        include: bus-refresh

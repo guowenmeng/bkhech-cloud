@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: config-client
+  cloud:
+    config:
+      profile: dev
+      name: config-client # 配置文件名称。默认 ${spring.application.name}
+      label: master
+      uri: http://localhost:8888 #config-server地址, 默认: http://localhost:8888
+
+eureka:
+  client:
+    register-with-eureka: true  #服务注册开关
+    fetch-registry: true #服务发现开关
+    service-url:
+      defaultZone: http://peer1:8761/eureka

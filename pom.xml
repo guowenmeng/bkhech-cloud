@@ -15,11 +15,16 @@
     <name>bkhech-cloud</name>
     <description>bkhech-cloud project for Spring Cloud</description>
 
+    <packaging>pom</packaging>
+
     <modules>
         <module>cloud-eureka-server-ha</module>
         <module>cloud-eureka-server</module>
         <module>cloud-customer-service</module>
         <module>cloud-producer-service</module>
+        <module>cloud-config-server-ha</module>
+        <module>cloud-config-server</module>
+        <module>cloud-config-client</module>
     </modules>
 
     <properties>
@@ -36,6 +41,12 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
         </dependency>
 
         <dependency>
