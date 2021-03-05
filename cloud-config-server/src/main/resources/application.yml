@@ -22,12 +22,14 @@ spring:
 
 server:
   port: 8888
+
 eureka:
   client:
     register-with-eureka: true  #服务注册开关
     fetch-registry: true #服务发现开关
     service-url:
       defaultZone: http://peer1:8761/eureka
+
 management:
   endpoints:
     web:

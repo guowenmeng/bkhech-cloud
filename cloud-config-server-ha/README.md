@@ -21,3 +21,5 @@
  查看用户：rabbitmqctl list_users
  查看用户权限：rabbitmqctl  list_user_permissions admin
  给用户设置权限：rabbitmqctl set_permissions -p / admin ".*" ".*" ".*"
+
+4. 刷新配置：curl -X POST http://localhost:8888/actuator/bus-refresh
