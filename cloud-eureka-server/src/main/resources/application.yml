@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: eureka-server
+server:
+  port: 8761
+eureka:
+  instance:
+    # 需要在hosts中配置：127.0.0.1  peer1
+    # 单机默认：hostname: localhost
+    hostname: peer1  #eureka服务端的实例名称
+  client:
+    register-with-eureka: false #表示是否将自己注册到Eureka Server
+    fetch-registry: false  #表示是否从Eureka Server获取注册的服务信息。false表示自己端就是注册中心，并不需要去检索服务
+  server:
+    enable-self-preservation: false #是否开启服务保护机制
+    eviction-interval-timer-in-ms: 100

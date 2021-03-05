@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: eureka-server-cluster
+
+  profiles:
+    active: peer1
+
+  #使用密码访问
+  security:
+    user:
+      name: eureka
+      password: 123456

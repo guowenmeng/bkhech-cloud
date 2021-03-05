@@ -1,0 +1,21 @@
+server:
+  port: 8001
+
+spring:
+  application:
+    name: customer-service
+
+eureka:
+  client:
+    register-with-eureka: true  #服务注册开关
+    fetch-registry: true #服务发现开关
+    service-url:
+      defaultZone: http://peer1:8761/eureka
+
+feign:
+  client:
+    config:
+      default:
+        loggerLevel: basic
+        connectTimeout: 5000
+        readTimeout: 5000
