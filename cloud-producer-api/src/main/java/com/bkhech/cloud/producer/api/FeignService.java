@@ -1,4 +1,4 @@
-package com.bkhech.cloud.customer.feign;
+package com.bkhech.cloud.producer.api;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;

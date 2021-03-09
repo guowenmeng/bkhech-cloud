@@ -22,6 +22,7 @@
         <module>cloud-eureka-server</module>
         <module>cloud-customer-service</module>
         <module>cloud-producer-service</module>
+        <module>cloud-producer-api</module>
         <module>cloud-config-server-ha</module>
         <module>cloud-config-server</module>
         <module>cloud-config-client</module>
