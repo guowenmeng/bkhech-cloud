@@ -8,7 +8,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @date 2021/3/5
  */
 @ConfigurationProperties(prefix = "userinfo")
-public class UserInfoConfig {
+public class UserInfoConfigurationPropertiesConfig {
 
     private String username;
     private String password;
