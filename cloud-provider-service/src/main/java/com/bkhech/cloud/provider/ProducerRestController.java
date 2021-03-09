@@ -1,4 +1,4 @@
-package com.bkhech.cloud.producer;
+package com.bkhech.cloud.provider;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @date 2021/3/4
  */
 @RestController
-@RequestMapping("producer")
+@RequestMapping("provider")
 public class ProducerRestController {
 
     @Value("${server.port}")

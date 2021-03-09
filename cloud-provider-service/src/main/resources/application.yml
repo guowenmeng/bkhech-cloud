@@ -1,5 +1,5 @@
 spring:
   application:
-    name: producer-service
+    name: provider-service
   profiles:
     active: peer1

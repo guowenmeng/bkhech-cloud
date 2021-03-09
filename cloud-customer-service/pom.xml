@@ -41,7 +41,7 @@
 
         <dependency>
             <groupId>com.bkhech</groupId>
-            <artifactId>cloud-producer-api</artifactId>
+            <artifactId>cloud-provider-api</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
 

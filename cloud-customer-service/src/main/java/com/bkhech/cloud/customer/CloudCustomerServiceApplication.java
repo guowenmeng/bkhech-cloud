@@ -17,7 +17,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
  * 开启feign客户端
  * basePackages = "com.bkhech.cloud.producer.api" 扫描提供者提供(cloud-producer-api)的 api
  */
-@EnableFeignClients(basePackages = "com.bkhech.cloud.producer.api")
+@EnableFeignClients(basePackages = "com.bkhech.cloud.provider.api")
 public class CloudCustomerServiceApplication {
 
     public static void main(String[] args) {
