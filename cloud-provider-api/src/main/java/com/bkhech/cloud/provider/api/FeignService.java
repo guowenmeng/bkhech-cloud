@@ -9,16 +9,18 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author guowm
  * @date 2021/3/4
  * @FeignClient中参数：
- * path 等价于 @RequestMapping("producer")
+ * name 为服务提供方在Eureka中注册的服务;
+ * path 等价于 @RequestMapping("producer");
+ * fallback 为熔断后指定的异常处
  */
 
-@FeignClient(name = "provider-service", path = "provider")
+@FeignClient(name = "provider-service", path = "provider", fallback = FeignServiceFallBack.class)
 public interface FeignService {
 
     /**
-     * 调用feign producer
+     * 调用feign provider
      * @return
      */
     @GetMapping("get")
-    String producerGet(@RequestParam String name);
+    String providerGet(@RequestParam String name);
 }

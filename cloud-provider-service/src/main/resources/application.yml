@@ -3,3 +3,8 @@ spring:
     name: provider-service
   profiles:
     active: peer1
+
+# 打印项目中所有 RequestMappingHandler url
+logging:
+  level:
+    org.springframework.web.servlet.mvc.method.annotation: trace

@@ -1,4 +1,4 @@
-package com.bkhech.cloud.customer.ribbon;
+package com.bkhech.cloud.consumer.ribbon;
 
 import com.netflix.loadbalancer.IRule;
 import com.netflix.loadbalancer.RoundRobinRule;

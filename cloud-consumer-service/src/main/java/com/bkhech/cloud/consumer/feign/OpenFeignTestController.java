@@ -1,4 +1,4 @@
-package com.bkhech.cloud.customer.feign;
+package com.bkhech.cloud.consumer.feign;
 
 import com.bkhech.cloud.provider.api.FeignService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +20,7 @@ public class OpenFeignTestController {
 
     @GetMapping("openfeign/get")
     public String req() {
-        String result = feignService.producerGet("openfeign-client");
+        String result = feignService.providerGet("openfeign-client");
         return result;
     }
 }
