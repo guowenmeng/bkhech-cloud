@@ -4,10 +4,15 @@ server:
 spring:
   application:
     name: customer-service
+  cloud:
+    circuitbreaker:
+      hystrix:
+        enabled: true
 
 # 打印项目中所有 RequestMappingHandler url
 logging:
   level:
+    com.bkhech.cloud.provider.api: debug
     org.springframework.web.servlet.mvc.method.annotation: trace
 
 eureka:
@@ -19,24 +24,26 @@ eureka:
 
 # feign 超时设置。
 # 当设置 feign.hystrix.enabled=true，启用 feign-hystrix 时会导致 feign 的超时设置失效
-#feign:
-#  client:
-#    config:
-#      default:
-#        loggerLevel: basic #日志等级
-#        connectTimeout: 3000 #连接超时
-#        readTimeout: 3000 #读取超时
-
-# 开启断路器（熔断器）
 feign:
+  client:
+    config:
+      default:
+        loggerLevel: FULL #日志等级
+        connectTimeout: 5000 #连接超时
+        readTimeout: 5000 #读取超时
   hystrix:
     enabled: true
-
+    compression:
+      request:
+        enabled: true
+        mime-types: text/xml,application/xml,application/json
+        min-request-size: 2048
+      response:
+        enabled: true
 hystrix:
-  shareSecurityContext: true
   command:
     default:
       execution:
         isolation:
           thread:
-            timeoutInMilliseconds: 5000
+            timeoutInMilliseconds: 3000 # 设置hystrix的超时时间（timeoutInMilliseconds）要小于feign的超时时间（readTimeout）, 之后才调用降级方法

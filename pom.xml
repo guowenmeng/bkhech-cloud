@@ -26,6 +26,7 @@
         <module>cloud-config-server-ha</module>
         <module>cloud-config-server</module>
         <module>cloud-config-client</module>
+        <module>cloud-commons</module>
     </modules>
 
     <properties>
@@ -45,9 +46,15 @@
         </dependency>
 
         <dependency>
+            <groupId>com.bkhech</groupId>
+            <artifactId>cloud-commons</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <optional>true</optional>
         </dependency>
 
         <dependency>
