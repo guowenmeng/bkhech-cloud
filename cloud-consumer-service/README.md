@@ -18,3 +18,7 @@ feign:
     response:
       enabled: true
 ```
+3. 异常
+Incompatible fallbackFactory instance. Fallback/fallbackFactory of type class is not assignable to interface feign.hystrix.FallbackFactory
+
+注意 import 包 问题：feign.hystrix.FallbackFactory
