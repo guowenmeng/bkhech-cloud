@@ -18,6 +18,7 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>cloud-commons</module>
         <module>cloud-eureka-server-ha</module>
         <module>cloud-eureka-server</module>
         <module>cloud-consumer-service</module>
@@ -26,7 +27,7 @@
         <module>cloud-config-server-ha</module>
         <module>cloud-config-server</module>
         <module>cloud-config-client</module>
-        <module>cloud-commons</module>
+        <module>cloud-zuul-server</module>
     </modules>
 
     <properties>

@@ -31,8 +31,8 @@ public class FeignServiceFallBackFactory implements FallbackFactory<FeignService
         if (cause instanceof SystemException) {
             return name -> "FeignServiceFallBackFactory: " + name + ": " + LocalDateTime.now() + ": " + cause.getMessage();
         }
-        //未知异常托底方法 如： 超时异常（HystrixTimeoutException）， 重试异常（RetryableException）等
 
+        //未知异常托底方法 如： 超时异常（HystrixTimeoutException）， 重试异常（RetryableException）等
         if (cause instanceof HystrixTimeoutException) {
             // 超时异常，可以能需要重试，服务提供方需要保证业务幂等性
             return name -> "FeignServiceFallBackFactory: " + name + ": " + LocalDateTime.now() + ": 超时异常";

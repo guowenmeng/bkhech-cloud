@@ -1,0 +1,37 @@
+spring:
+  application:
+    name: zuul-server
+
+# 打印项目中所有 RequestMappingHandler url
+logging:
+  level:
+    org.springframework.web.servlet.mvc.method.annotation: trace
+
+server:
+  port: 9999
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://peer1:8761/eureka
+
+# 通过网关服务访问分布式内部服务，自定义访问超时时间
+ribbon:
+  ConnectTimeout: 3000 #请求连接的超时时间
+  ReadTimeout: 5000 #请求处理的超时时间
+
+zuul:
+  # 忽略自动通过服务名转发。默认全部代理转发
+  ignored-services: '*'
+  # 给路由添加路由前缀。在所有的router前面添加一个前缀，nginx 转发请求到多个网关时可能要用到。http://localhost:9999/bkhech/customer/openfeign/get
+  #prefix: /bkhech
+  routes: # 给服务配置自定义路由
+    customer-service: /customer/**
+
+# http://localhost:9999/actuator/routes/details
+# 开启查看路由的端点
+management:
+  endpoints:
+    web:
+      exposure:
+        include: routes
