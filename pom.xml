@@ -28,6 +28,8 @@
         <module>cloud-config-server</module>
         <module>cloud-config-client</module>
         <module>cloud-zuul-server</module>
+        <module>cloud-user-service</module>
+        <module>cloud-user-api</module>
     </modules>
 
     <properties>

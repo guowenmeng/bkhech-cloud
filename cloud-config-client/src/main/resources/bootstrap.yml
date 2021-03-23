@@ -6,9 +6,17 @@ spring:
       profile: dev
       name: config-client # 配置文件名称。默认 ${spring.application.name}
       label: master
-      uri: http://localhost:8888 #config-server地址, 默认: http://localhost:8888
+      uri: http://localhost:8888 #config-server地址, 默认: http://localhost:8888。直连配置中心
+      # 基于 Eureka 发现配置中心
+#      discovery:
+#        enabled: true
+#        service-id: config-server
 
 eureka:
+  instance:
+    # 注册ip，而非域名
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
   client:
     register-with-eureka: true  #服务注册开关
     fetch-registry: true #服务发现开关

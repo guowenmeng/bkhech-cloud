@@ -1,14 +1,15 @@
-package com.bkhech.cloud.zuul.server.filter.blacklist;
+package com.bkhech.cloud.zuul.server.filter.pre.blacklist;
 
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
+import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -23,9 +24,7 @@ public class BlackListFilter extends ZuulFilter {
 
     static {
         // 模拟黑名单
-        blackList=new ArrayList<>();
-        blackList.add("127.0.0.1");
-        blackList.add("0:0:0:0:0:0:0:1");
+        blackList = Arrays.asList("192.168.71.23");
     }
 
 
@@ -35,11 +34,11 @@ public class BlackListFilter extends ZuulFilter {
      */
     @Override
     public String filterType() {
-        return "pre";
+        return FilterConstants.PRE_TYPE;
     }
 
     /**
-     * filter 排序
+     * filter 排序 越小越先执行
      * @return
      */
     @Override
@@ -53,8 +52,7 @@ public class BlackListFilter extends ZuulFilter {
      */
     @Override
     public boolean shouldFilter() {
-        //TODO 测试时修改为 true
-        return false;
+        return true;
     }
 
     /**

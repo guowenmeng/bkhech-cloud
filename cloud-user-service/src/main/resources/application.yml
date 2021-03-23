@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: user-service
+
+server:
+  port: 7777
+
+# 打印项目中所有 RequestMappingHandler url
+logging:
+  level:
+    org.springframework.web.servlet.mvc.method.annotation: trace
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://peer1:8761/eureka
+
+bkhech:
+  jwt:
+    effective-time: 20m # jwt token有效时间。时间单位遵循 Duration 规则

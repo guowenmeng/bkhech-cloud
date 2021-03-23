@@ -1,39 +1,96 @@
 package com.bkhech.cloud.commons;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.validation.BindException;
+import org.springframework.validation.FieldError;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.ServletRequestBindingException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.multipart.MaxUploadSizeExceededException;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author guowm
  * @date 2021/3/17
  */
+@Slf4j
 @ControllerAdvice
+@ResponseBody
 public class SystemExceptionHandler {
 
-    private final Logger LOGGER = LoggerFactory.getLogger(SystemExceptionHandler.class);
-
-    @ResponseBody
+    /**
+     * 处理业务异常
+     * @param ex
+     * @return
+     */
     @ExceptionHandler(SystemException.class)
-    @ResponseStatus(HttpStatus.OK)
-    public APIResponse handler(HttpServletResponse response, Exception ex) {
+    public APIResponse<String> handler(Exception ex) {
         SystemException exception = (SystemException) ex;
-        LOGGER.error("SystemException occurs! The exception information is as follows: ", ex);
-        return APIResponseUtil.error(exception.getCode(), exception.getMessage(), exception.getErrorCause());
+        log.error("SystemException occurs! The exception information is as follows: ", ex);
+        return APIResponseUtil.error(exception.getCode(), exception.getMessage(), "");
     }
 
-    @ResponseBody
+    /**
+     * 未知异常
+     * @param request
+     * @param ex
+     * @return
+     */
     @ExceptionHandler(Throwable.class)
-    public APIResponse globalHandler(HttpServletRequest request, Exception ex) {
-        LOGGER.error("UnknownException occurs! Request URL = " + request.getRequestURI() +". The exception information is as follows: ", ex);
-        return APIResponseUtil.error(-1, "系统繁忙，请稍后重试", ex.getMessage());
+    public APIResponse<String> handleUnknownException(HttpServletRequest request, Exception ex) {
+        log.error("UnknownException occurs! Request URL = " + request.getRequestURI() +". The exception information is as follows: ", ex);
+        return APIResponseUtil.error(MessageTipsType.FAIL_OPERATION.getCode(), "系统繁忙，请稍后重试", ex.getMessage());
+    }
+
+    /**
+     * 处理接口数据验证异常
+     * @param e
+     * @return
+     */
+    @ExceptionHandler(value = {BindException.class})
+    public APIResponse<String> handleBeanPropertyBindingResult(BindException e) {
+        return APIResponseUtil.error(buildMessageFromException(e.getFieldErrors()));
+    }
+
+    /**
+     * 处理接口数据验证异常
+     * @param e
+     * @return
+     */
+    @ExceptionHandler(value = {MethodArgumentNotValidException.class})
+    public APIResponse<String> handleArgumentNotValid(MethodArgumentNotValidException  e) {
+        return APIResponseUtil.error(buildMessageFromException(e.getBindingResult().getFieldErrors()));
+    }
+
+    private String buildMessageFromException(List<FieldError> fieldErrors) {
+        return fieldErrors.stream().map(FieldError::getDefaultMessage).collect(Collectors.joining(","));
+    }
+
+    /**
+     * 处理接口数据验证异常,请求方式异常
+     * @param e
+     * @return
+     */
+    @ExceptionHandler(value = {ServletRequestBindingException.class, IllegalArgumentException.class, HttpRequestMethodNotSupportedException.class})
+    public APIResponse<String> handleMissingServletRequestParameter(Exception e) {
+        return APIResponseUtil.error(e.getMessage());
+    }
+
+
+    /**
+     * MaxUploadSizeExceededException
+     * @param e
+     * @return
+     */
+    @ExceptionHandler(value = {MaxUploadSizeExceededException.class})
+    public APIResponse<String> handleAuthorizationException(MaxUploadSizeExceededException e) {
+        return APIResponseUtil.error(MessageTipsType.MAX_UPLOAD_SIZE_EXCEEDED);
     }
 
 }
