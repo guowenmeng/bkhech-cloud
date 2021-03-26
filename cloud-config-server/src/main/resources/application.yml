@@ -15,7 +15,7 @@ spring:
       name: config-server # 配置文件名称。默认 ${spring.application.name}
   rabbitmq:
     host: 192.168.85.125
-    port: 5672
+    port: 5672  # 注意，这里是5672，不是访问界面用的15672，这个是默认值
     username: admin
     password: admin
     virtual-host: /

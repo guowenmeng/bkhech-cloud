@@ -3,6 +3,27 @@ spring:
     name: provider-service
   profiles:
     active: peer1
+  rabbitmq:
+    addresses: 192.168.85.125
+    port: 5672  # 注意，这里是5672，不是访问界面用的15672，这个是默认值
+    username: admin
+    password: admin
+    virtual-host: /
+  cloud:
+    stream:
+      bindings:
+        # ---------消息消费-----------
+        input:
+          binder:
+          destination: messageCenterTopic
+          group: emailGroup  # 拥有 group 默认会持久化队列
+      rabbit:
+        bindings:
+          input:
+            consumer:
+              exchangeType: topic # 默认
+              bindingRoutingKey: email,sms  # 将queue绑定到exchange时使用的routing key。默认'#'
+              bindingRoutingKeyDelimiter: ','
 
 # 打印项目中所有 RequestMappingHandler url
 logging:

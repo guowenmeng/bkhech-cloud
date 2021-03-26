@@ -8,6 +8,27 @@ spring:
     circuitbreaker:
       hystrix:
         enabled: true
+    stream:
+      bindings:
+        output:
+          destination: messageCenterTopic
+      rabbit:
+        bindings:
+          output:
+            producer:
+              # 根据消息类型动态路由消息。
+              # 构建消息时，自定义一个 key 为 messageType 的 header，而我们在定义生产者时，
+              # 指定了 routingKeyExpression 为 headers.messageType，也就是说，在投递时
+              # 会以 messageType 的值作为最后的 routingKey
+              routingKeyExpression: headers.messageType # 生产者配置RabbitMq的动态路由键
+
+  rabbitmq:
+    addresses: 192.168.85.125
+    port: 5672  # 注意，这里是5672，不是访问界面用的15672，这个是默认值
+    username: admin
+    password: admin
+    virtual-host: /
+
 
 # 打印项目中所有 RequestMappingHandler url
 logging:
