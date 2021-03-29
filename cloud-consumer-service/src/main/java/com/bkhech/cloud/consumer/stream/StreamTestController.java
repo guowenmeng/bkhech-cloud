@@ -26,4 +26,10 @@ public class StreamTestController {
         Boolean result = streamSender.send(message, messageType);
         return APIResponseUtil.success(result);
     }
+
+    @GetMapping("stream/send/dlx")
+    public APIResponse<Boolean> sendDlx(@RequestParam String message) {
+        Boolean result = streamSender.sendDlx(message);
+        return APIResponseUtil.success(result);
+    }
 }

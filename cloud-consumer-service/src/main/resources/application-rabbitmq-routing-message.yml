@@ -13,11 +13,6 @@ spring:
         output:
           destination: messageCenterTopic
           content-type: application/json
-        orderOutput:
-          destination: orderTopic
-          content-type: application/json
-          producer:
-            requiredGroups: orderGroup
       rabbit:
         bindings:
           output:
@@ -27,14 +22,6 @@ spring:
               # 指定了 routingKeyExpression 为 headers.messageType，也就是说，在投递时
               # 会以 messageType 的值作为最后的 routingKey
               routingKeyExpression: headers.messageType # 生产者配置RabbitMq的动态路由键
-          orderOutput:
-            producer:
-#              bindingRoutingKey: anonymousOrderRoutingKey #绑定路由键，匿名路由键，不让消费
-              ttl: 10000 #ms 消息10秒不消费转入死信队列，具体到订单就是30分钟
-              autoBindDlq: true #启动死信队列
-              deadLetterExchange: dlxOrderDirect #绑定exchange
-              deadLetterQueueName: dlxOrderDirect.orderGroup.dlq #死信队列名称，可不指定，默认prefix+destination.dlq
-              deadLetterRoutingKey: dlxOrderRoutingKey #死信队列routingKey名称，可不指定，defaults to destination.
   rabbitmq:
     addresses: 192.168.85.125
     port: 5672  # 注意，这里是5672，不是访问界面用的15672，这个是默认值

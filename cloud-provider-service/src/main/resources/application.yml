@@ -14,15 +14,24 @@ spring:
       bindings:
         # ---------消息消费-----------
         input:
-          binder:
           destination: messageCenterTopic
           group: emailGroup  # 拥有 group 默认会持久化队列
+          contentType: application/json # 默认
+        dlxOrderInput:
+          destination: dlxOrderDirect
+          group: orderGroup.dlq  # 拥有 group 默认会持久化队列【destination.group 构成queue名称】
+          contentType: application/json # 默认
       rabbit:
         bindings:
           input:
             consumer:
               exchangeType: topic # 默认
               bindingRoutingKey: email,sms  # 将queue绑定到exchange时使用的routing key。默认'#'
+              bindingRoutingKeyDelimiter: ','
+          dlxOrderInput:
+            consumer:
+              exchangeType: direct # 默认
+              bindingRoutingKey: dlxOrderRoutingKey  # 将queue绑定到exchange时使用的routing key。默认'#'
               bindingRoutingKeyDelimiter: ','
 
 # 打印项目中所有 RequestMappingHandler url
