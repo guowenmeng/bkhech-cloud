@@ -83,3 +83,11 @@ hystrix:
         isolation:
           thread:
             timeoutInMilliseconds: 3000 # 设置hystrix的超时时间（timeoutInMilliseconds）要小于feign的超时时间（readTimeout）, 之后才调用降级方法
+# 请求处理的超时时间
+ribbon:
+  # 等待请求响应的超时时间. 单位：ms
+  ReadTimeout: 5000
+  # 连接超时时间. 单位：ms
+  ConnectTimeout: 1000
+  # 是否对所有请求进行失败重试, 设置为 false, 让feign只针对Get请求进行重试.
+  OkToRetryOnAllOperations: false
