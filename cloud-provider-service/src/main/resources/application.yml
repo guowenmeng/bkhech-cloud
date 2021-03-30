@@ -21,6 +21,10 @@ spring:
           destination: dlxOrderDirect
           group: orderGroup.dlq  # 拥有 group 默认会持久化队列【destination.group 构成queue名称】
           contentType: application/json # 默认
+        orderDelayInput:
+          destination: orderDelayTopic
+          group: orderDelayGroup
+          contentType: application/json # 默认
       rabbit:
         bindings:
           input:
@@ -30,9 +34,13 @@ spring:
               bindingRoutingKeyDelimiter: ','
           dlxOrderInput:
             consumer:
-              exchangeType: direct # 默认
+              exchangeType: direct
               bindingRoutingKey: dlxOrderRoutingKey  # 将queue绑定到exchange时使用的routing key。默认'#'
               bindingRoutingKeyDelimiter: ','
+          orderDelayInput:
+            consumer:
+              bindingRoutingKey: orderDelay
+              delayedExchange: true # whether a delayed message exchange should be used.
 
 # 打印项目中所有 RequestMappingHandler url
 logging:

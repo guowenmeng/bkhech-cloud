@@ -32,4 +32,12 @@ public class StreamTestController {
         Boolean result = streamSender.sendDlx(message);
         return APIResponseUtil.success(result);
     }
+
+    @GetMapping("stream/send/delay")
+    public APIResponse<Boolean> sendDelay(@RequestParam String message,
+                                          @RequestParam String messageType,
+                                          @RequestParam Integer delayMills) {
+        Boolean result = streamSender.sendDelay(message, messageType, delayMills);
+        return APIResponseUtil.success(result);
+    }
 }

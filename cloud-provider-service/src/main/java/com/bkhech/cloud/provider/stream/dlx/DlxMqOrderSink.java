@@ -8,7 +8,7 @@ import org.springframework.messaging.SubscribableChannel;
  * @author guowm
  * @date 2021/3/29
  */
-public interface DlxMqOrderProcessor {
+public interface DlxMqOrderSink {
 
     /**
      * Input channel name.

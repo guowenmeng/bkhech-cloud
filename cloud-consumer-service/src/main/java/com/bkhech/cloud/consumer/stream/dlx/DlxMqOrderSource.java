@@ -8,7 +8,7 @@ import org.springframework.messaging.MessageChannel;
  * @author guowm
  * @date 2021/3/29
  */
-public interface DlxMqOrderProcessor {
+public interface DlxMqOrderSource {
 
     /**
      * Name of the output channel.

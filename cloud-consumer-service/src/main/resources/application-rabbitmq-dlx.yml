@@ -13,9 +13,11 @@ spring:
         output:
           destination: messageCenterTopic
           content-type: application/json
-        orderDelayOutput:
-          destination: orderDelayTopic
+        orderOutput:
+          destination: orderTopic
           content-type: application/json
+          producer:
+            requiredGroups: orderGroup
       rabbit:
         bindings:
           output:
@@ -25,10 +27,6 @@ spring:
               # 指定了 routingKeyExpression 为 headers.messageType，也就是说，在投递时
               # 会以 messageType 的值作为最后的 routingKey
               routingKeyExpression: headers.messageType # 生产者配置RabbitMq的动态路由键
-          orderDelayOutput:
-            producer:
-              routingKeyExpression: headers.messageType
-              delayedExchange: true # whether a delayed message exchange should be used.
           orderOutput:
             producer:
 #              bindingRoutingKey: anonymousOrderRoutingKey #绑定路由键，匿名路由键，不让消费
