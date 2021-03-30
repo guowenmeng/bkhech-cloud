@@ -47,3 +47,9 @@ spring:
 logging:
   level:
     org.springframework.web.servlet.mvc.method.annotation: trace
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, beans # 解禁指定 Endpoint， 默认 health,info
