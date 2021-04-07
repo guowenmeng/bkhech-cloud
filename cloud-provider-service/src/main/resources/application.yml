@@ -1,6 +1,9 @@
 spring:
   application:
     name: provider-service
+  messages:
+    basename: i18n/messages
+    encoding: UTF-8
   profiles:
     active: peer1
   rabbitmq:
