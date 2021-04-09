@@ -37,6 +37,7 @@ spring:
             - Path=/userUserLb/**
           filters:
             - StripPrefix=1
+            - RequestTime=true
           uri: lb://user-service
       discovery:
         locator:
