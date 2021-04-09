@@ -10,6 +10,7 @@ cloud-config-server 8888
 cloud-config-server-ha 8888 8889 8890
 cloud-config-client 8005
 cloud-zuul-server 9999
+cloud-gateway-server 9990
 cloud-user-service 7777
 
 

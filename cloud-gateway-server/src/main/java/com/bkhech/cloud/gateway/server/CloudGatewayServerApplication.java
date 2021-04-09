@@ -1,23 +1,18 @@
-package com.bkhech.cloud.zuul.server;
+package com.bkhech.cloud.gateway.server;
 
-import com.bkhech.cloud.zuul.server.authentication.jwt.config.JwtConfig;
+import com.bkhech.cloud.gateway.server.jwt.config.JwtConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 import org.springframework.context.annotation.Import;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-/**
- * @EnableZuulProxy 注解启用zuul
- */
-@EnableZuulProxy
 @Import(JwtConfig.class)
-public class CloudZuulServerApplication {
+public class CloudGatewayServerApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(CloudZuulServerApplication.class, args);
+        SpringApplication.run(CloudGatewayServerApplication.class, args);
     }
 
 }

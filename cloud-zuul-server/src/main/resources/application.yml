@@ -27,11 +27,11 @@ zuul:
   #prefix: /bkhech
   routes:
     # 给服务配置自定义路由，这个名字可以随便写
-    customer-service-id:
+    customer-service-route:
       path: /customer/**
       serviceId: customer-service
       stripPrefix: true
-    user-service-id:
+    user-service-route:
       path: /user/**
       serviceId: user-service
       stripPrefix: true

@@ -17,14 +17,17 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication.Type.SERVLET;
+
 /**
  * @author guowm
  * @date 2021/3/17
  */
 @Slf4j
-@ControllerAdvice
-@ConditionalOnWebApplication
+// Servlet 环境下生效
+@ConditionalOnWebApplication(type = SERVLET)
 @ConditionalOnMissingBean(SystemExceptionHandler.class)
+@ControllerAdvice
 @ResponseBody
 public class SystemExceptionHandler {
 

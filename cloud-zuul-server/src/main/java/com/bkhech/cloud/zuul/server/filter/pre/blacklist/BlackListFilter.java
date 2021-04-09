@@ -70,7 +70,7 @@ public class BlackListFilter extends ZuulFilter {
         String remoteAddr = request.getRemoteAddr();
 
         if (blackList.contains(remoteAddr)) {
-            // 请求就此阶段，不向下游请求
+            // 请求就此结束，不向下游请求
             currentContext.setSendZuulResponse(false);
             currentContext.setResponseBody("非法请求");
             currentContext.setResponseStatusCode(HttpStatus.FORBIDDEN.value());

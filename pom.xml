@@ -30,6 +30,7 @@
         <module>cloud-zuul-server</module>
         <module>cloud-user-service</module>
         <module>cloud-user-api</module>
+        <module>cloud-gateway-server</module>
     </modules>
 
     <properties>

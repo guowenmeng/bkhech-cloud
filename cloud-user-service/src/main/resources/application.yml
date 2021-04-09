@@ -17,4 +17,4 @@ eureka:
 
 bkhech:
   jwt:
-    effective-time: 20m # jwt token有效时间。时间单位遵循 Duration 规则
+    effective-time: 1m # jwt token有效时间 30m。时间单位遵循 Duration 规则
