@@ -1,7 +1,7 @@
 # bkhech-cloud
 
 ## 服务端口分配
-cloud-eureka-server 8761
+> cloud-eureka-server 8761
 cloud-eureka-server-ha 8761 8762 8763
 cloud-provider-service 8002 8003
 cloud-provider-api provider 的 jar 包
